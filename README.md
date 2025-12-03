@@ -16,7 +16,7 @@ DFA-Minimization-Research/
 │   ├── gui/                 
 │   │   ├── app.py                    
 │   │         
-│   ├── generate_dfa
+│   └── generate_dfa
 │
 ├── tests/                   
 │   ├── test_case_01.json
