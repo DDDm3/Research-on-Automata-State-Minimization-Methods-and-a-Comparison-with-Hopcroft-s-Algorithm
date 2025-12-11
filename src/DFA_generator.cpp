@@ -95,35 +95,47 @@ void expand_dfa(DFA &dfa, int target_size) {
 
 // Export to JSON
 void write_single_dfa_json(std::ofstream &file, const DFA &dfa, bool is_last = false) {
-    file << "    {\n";
-    file << "      \"num_states\": " << dfa.num_states << ",\n";
-    file << "      \"alphabet_size\": " << dfa.alphabet_size << ",\n";
-    file << "      \"start_state\": " << dfa.start_state << ",\n";
-    
-    file << "      \"accepting_states\": [";
-    int count = 0;
-    for (int s : dfa.accepting_states) {
-        file << s << (count < dfa.accepting_states.size() - 1 ? ", " : "");
-        count++;
-    }
-    file << "],\n";
+    file << "  [\n";
 
-    file << "      \"transitions\": [\n";
-    for (int i = 0; i < dfa.num_states; ++i) {
-        file << "        [";
+    for (int state = 0; state < dfa.num_states; ++state) {
+        std::string state_name = 'A' + std::to_string(state);  // Ví dụ: 0→A, 1→B, 2→C,...
+
+        file << "    {\n";
+        file << "      \"state_name\": \"" << state_name << "\",\n";
+
+        // Transitions
+        file << "      \"transitions\": [\n";
         for (int c = 0; c < dfa.alphabet_size; ++c) {
-            file << dfa.transitions[i][c] << (c < dfa.alphabet_size - 1 ? ", " : "");
+            std::string target_name = "S" + std::to_string(dfa.transitions[state][c]);
+            file << "        {\n";
+            file << "          \"input\": \"" << c << "\",\n";
+            file << "          \"target_state\": \"" << target_name << "\"\n";
+            file << "        }";
+
+            if (c < dfa.alphabet_size - 1) file << ",";
+            file << "\n";
         }
-        file << "]" << (i < dfa.num_states - 1 ? ",\n" : "\n");
+        file << "      ],\n";
+
+        // Start & End
+        file << "      \"is_start\": " << (state == dfa.start_state ? "true" : "false") << ",\n";
+        file << "      \"is_end\": " 
+             << (dfa.accepting_states.count(state) ? "true" : "false") << "\n";
+
+        file << "    }";
+
+        if (state < dfa.num_states - 1)
+            file << ",";
+        file << "\n";
     }
-    file << "      ]\n";
-    file << "    }" << (is_last ? "" : ",") << "\n";
+
+    file << "  ]" << (is_last ? "" : ",") << "\n";
 }
 
 int main() {
     // Config
     int base_states = 5; 
-    int alphabet_size = 2;    // Num of char
+    int alphabet_size = 4;    // Num of char
     
     std::cout << "Dang sinh DFA co so (Minimal)..." << std::endl;
     // 1. Generate minimal DFA

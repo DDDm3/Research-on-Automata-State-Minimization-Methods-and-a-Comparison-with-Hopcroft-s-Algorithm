@@ -1,16 +1,120 @@
 {
   "dfa_minimal": 
+  [
     {
-      "num_states": 5,
-      "alphabet_size": 2,
-      "start_state": 0,
-      "accepting_states": [1, 2, 4],
+      "state_name": "A0",
       "transitions": [
-        [0, 0],
-        [0, 1],
-        [0, 0],
-        [2, 3],
-        [0, 0]
-      ]
+        {
+          "input": "0",
+          "target_state": "S4"
+        },
+        {
+          "input": "1",
+          "target_state": "S2"
+        },
+        {
+          "input": "2",
+          "target_state": "S3"
+        },
+        {
+          "input": "3",
+          "target_state": "S0"
+        }
+      ],
+      "is_start": true,
+      "is_end": false
+    },
+    {
+      "state_name": "A1",
+      "transitions": [
+        {
+          "input": "0",
+          "target_state": "S0"
+        },
+        {
+          "input": "1",
+          "target_state": "S0"
+        },
+        {
+          "input": "2",
+          "target_state": "S3"
+        },
+        {
+          "input": "3",
+          "target_state": "S2"
+        }
+      ],
+      "is_start": false,
+      "is_end": false
+    },
+    {
+      "state_name": "A2",
+      "transitions": [
+        {
+          "input": "0",
+          "target_state": "S2"
+        },
+        {
+          "input": "1",
+          "target_state": "S3"
+        },
+        {
+          "input": "2",
+          "target_state": "S0"
+        },
+        {
+          "input": "3",
+          "target_state": "S0"
+        }
+      ],
+      "is_start": false,
+      "is_end": false
+    },
+    {
+      "state_name": "A3",
+      "transitions": [
+        {
+          "input": "0",
+          "target_state": "S2"
+        },
+        {
+          "input": "1",
+          "target_state": "S4"
+        },
+        {
+          "input": "2",
+          "target_state": "S1"
+        },
+        {
+          "input": "3",
+          "target_state": "S2"
+        }
+      ],
+      "is_start": false,
+      "is_end": true
+    },
+    {
+      "state_name": "A4",
+      "transitions": [
+        {
+          "input": "0",
+          "target_state": "S1"
+        },
+        {
+          "input": "1",
+          "target_state": "S4"
+        },
+        {
+          "input": "2",
+          "target_state": "S4"
+        },
+        {
+          "input": "3",
+          "target_state": "S4"
+        }
+      ],
+      "is_start": false,
+      "is_end": false
     }
+  ]
 }
